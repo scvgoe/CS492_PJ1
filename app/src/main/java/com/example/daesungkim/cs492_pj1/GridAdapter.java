@@ -3,7 +3,6 @@ package com.example.daesungkim.cs492_pj1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 
@@ -22,7 +22,7 @@ public class GridAdapter extends BaseAdapter implements View.OnClickListener {
     private ArrayList data;
     private static LayoutInflater inflater = null;
     public Resources res;
-    Uri tempValues=null;
+    ImageObject tempValues = null;
 
     /*************  CustomAdapter Constructor *****************/
     public GridAdapter(Activity a, ArrayList d, Resources resLocal) {
@@ -56,6 +56,7 @@ public class GridAdapter extends BaseAdapter implements View.OnClickListener {
 
     /********* Create a holder Class to contain inflated xml file elements *********/
     public static class ViewHolder{
+        public TextView text;
         public ImageView image;
     }
 
@@ -74,7 +75,8 @@ public class GridAdapter extends BaseAdapter implements View.OnClickListener {
             /****** View Holder Object to contain tabitem.xml file elements ******/
 
             holder = new ViewHolder();
-            holder.image = (ImageView) vi.findViewById(R.id.imageView);
+            holder.text = (TextView) vi.findViewById(R.id.text);
+            holder.image = (ImageView) vi.findViewById(R.id.image);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag( holder );
@@ -92,10 +94,13 @@ public class GridAdapter extends BaseAdapter implements View.OnClickListener {
         else
         {
             /***** Get each Model object from Arraylist ********/
-            tempValues =  (Uri) data.get( position );
+            tempValues = null;
+            tempValues =  (ImageObject) data.get(position);
 
             /************  Set Model values in Holder elements ***********/
-            holder.image.setImageURI(tempValues);
+            holder.text.setText(tempValues.getTitle());
+            holder.image.setImageResource(tempValues.getId());
+
         }
         return vi;
     }

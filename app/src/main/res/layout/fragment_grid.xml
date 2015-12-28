@@ -8,6 +8,13 @@
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/gridView" />
-
+        android:id="@+id/gridView"
+        android:columnWidth="100dp"
+        android:drawSelectorOnTop="false"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:nestedScrollingEnabled="false"
+        android:smoothScrollbar="false"
+        android:contextClickable="false"
+        android:paddingBottom="100dp" />
 </FrameLayout>
