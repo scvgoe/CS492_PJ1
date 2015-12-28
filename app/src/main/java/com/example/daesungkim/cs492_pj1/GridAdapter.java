@@ -2,33 +2,30 @@ package com.example.daesungkim.cs492_pj1;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
-import android.widget.Switch;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 
 /********* Adapter class extends with BaseAdapter and implements with OnClickListener ************/
-public class ListAdapter extends BaseAdapter implements View.OnClickListener {
+public class GridAdapter extends BaseAdapter implements View.OnClickListener {
 
     /*********** Declare Used Variables *********/
     private Activity activity;
     private ArrayList data;
     private static LayoutInflater inflater = null;
     public Resources res;
-    String tempValues=null;
+    Uri tempValues=null;
 
     /*************  CustomAdapter Constructor *****************/
-    public ListAdapter(Activity a, ArrayList d, Resources resLocal) {
+    public GridAdapter(Activity a, ArrayList d, Resources resLocal) {
 
         /********** Take passed values **********/
         activity = a;
@@ -59,7 +56,7 @@ public class ListAdapter extends BaseAdapter implements View.OnClickListener {
 
     /********* Create a holder Class to contain inflated xml file elements *********/
     public static class ViewHolder{
-        public TextView text;
+        public ImageView image;
     }
 
     /****** Depends upon data size called for each row , Create each ListView row *****/
@@ -72,12 +69,12 @@ public class ListAdapter extends BaseAdapter implements View.OnClickListener {
         if(convertView==null){
 
             /****** Inflate tabitem.xml file for each row ( Defined below ) *******/
-            vi = inflater.inflate(R.layout.adapter_list, null);
+            vi = inflater.inflate(R.layout.adapter_grid, null);
 
             /****** View Holder Object to contain tabitem.xml file elements ******/
 
             holder = new ViewHolder();
-            holder.text = (TextView) vi.findViewById(R.id.objectName);
+            holder.image = (ImageView) vi.findViewById(R.id.imageView);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag( holder );
@@ -95,14 +92,10 @@ public class ListAdapter extends BaseAdapter implements View.OnClickListener {
         else
         {
             /***** Get each Model object from Arraylist ********/
-            tempValues = null;
-            tempValues =  data.get( position ).toString();
+            tempValues =  (Uri) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
-
-            holder.text.setText(tempValues);
-            final TextView objectName = holder.text;
-
+            holder.image.setImageURI(tempValues);
         }
         return vi;
     }

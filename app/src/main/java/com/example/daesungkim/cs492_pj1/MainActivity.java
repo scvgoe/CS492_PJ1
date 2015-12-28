@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new ListFragment();
-//                case 1:
-//                    return "B";
+                case 1:
+                    return new GridFragment();
 //                case 2:
 //                    return "C";
             }
