@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                     return new ListFragment();
                 case 1:
                     return new GridFragment();
-//                case 2:
-//                    return "C";
+                case 2:
+                    return new MapFragment();
             }
 
             return PlaceholderFragment.newInstance(position + 1);
